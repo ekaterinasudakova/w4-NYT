@@ -15,7 +15,7 @@
 		</label>
 		<button id="search">Search</button>
 
-		<ul class="articles"></ul>
+		<ul class=""></ul>
 		<script src="dist/js/main.js"></script>
 	</body>
 </html>
@@ -28,11 +28,6 @@
 
 	var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json?";
 	var apiKey = "de824ad9d9b141e8bef4cbd433243ae0";
-
-	const APIKEY = "de824ad9d9b141e8bef4cbd433243ae0";
-	const APIBASE = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=" + APIKEY;
-
-	let $articles = document.querySelector(".articles");
 	
 	searchBtn.addEventListener('click', function(e){
 		e.preventDefault();
@@ -42,14 +37,14 @@
 	})
 
 	function getValueFromApi(){
-		axios.get(APIBASE).then(function(response){
-			console.log(response.data);
-			if(response.data.status !== "OK"){
-			console.warn("shit's going down")
-			}
-		}
-	})
-}
+		axios.get(url += 'api-key=' + apiKey + '&')
+		.then(function(data){
+			console.log('here are the articles based on that keyword:', data.data, data);
+		})
+		.catch(function (error) {
+ 			console.warn('axios encountered an error!', error);
+  		});
+	}
 
 	function gotValues( ){
 		var articles = currentData.response.docs;
