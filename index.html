@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title>nyt api</title>
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="stylesheet" href="dist/css/main.css">
+	</head>
+	<body>
+		<label>Search NYT Articles:
+			<input type="text" name="keyword" id="keyword">
+		</label>
+		<button id="search">Search</button>
+
+		<ul class="articles"></ul>
+		<script src="dist/js/main.js"></script>
+	</body>
+</html>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript">
+
+	const searchBtn = document.getElementById('search');
+	var keywordEl = document.getElementById('keyword');
+
+	var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json?";
+	var apiKey = "de824ad9d9b141e8bef4cbd433243ae0";
+
+	const APIKEY = "de824ad9d9b141e8bef4cbd433243ae0";
+	const APIBASE = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=" + APIKEY;
+
+	let $articles = document.querySelector(".articles");
+	
+	searchBtn.addEventListener('click', function(e){
+		e.preventDefault();
+		const keyValue = keywordEl.value;
+		console.log(keyValue);
+		getValueFromApi(keyValue);
+	})
+
+	function getValueFromApi(){
+		axios.get(APIBASE).then(function(response){
+			console.log(response.data);
+			if(response.data.status !== "OK"){
+			console.warn("shit's going down")
+			}
+		}
+	})
+}
+
+	function gotValues( ){
+		var articles = currentData.response.docs;
+		console.log(articles);
+
+		for (var i=0; i< articles.length; i++){
+			createElement('h1', articles[i].headline.main);
+	}
+	}
+</script>
